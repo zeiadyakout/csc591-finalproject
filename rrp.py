@@ -1,5 +1,5 @@
 from RRP.config import *
-from data import DATA
+from RRP.data import DATA
 from RRP.eg import *
 
 def rrp():
@@ -8,5 +8,5 @@ def rrp():
     node.show()
     print("evals: ", evals)
 
-doubletap()
+doubletap("data/wineQuality/wineQuality.csv")
 rrp()

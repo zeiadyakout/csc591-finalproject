@@ -1,7 +1,7 @@
 from .data import DATA
 from .num import NUM
 from .sym import SYM
-import l
+from .l import *
 import sys
 import ast
 from .misc import *
@@ -182,7 +182,7 @@ def doubletap(src=None):
     dataset = DATA(src or "../../data/auto93.csv")
     best1, rest, evals1 = dataset.branch(32)
     best2, _, evals2 = best1.branch(4)
-    print(l.o(best2.mid().cells), l.o(rest.mid().cells))
+    print(o(best2.mid().cells), o(rest.mid().cells))
     print(evals1+evals2)
 
 def bins(src=None):

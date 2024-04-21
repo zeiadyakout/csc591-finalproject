@@ -1,6 +1,6 @@
 from .config import the
 import math
-import cols
+from .cols import *
 import sys
 from .l import *
 

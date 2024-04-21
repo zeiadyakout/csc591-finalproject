@@ -1,6 +1,6 @@
-from range import RANGE
+from .range import RANGE
 from .l import *
-from config import *
+from .config import *
 
 def _ranges(cols, rowss):
     t = []
