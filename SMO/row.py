@@ -1,6 +1,6 @@
-from config import the
+from .config import the
 import math
-import cols
+from .cols import *
 
 class ROW:
     def __init__(self, t):

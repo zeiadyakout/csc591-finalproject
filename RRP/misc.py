@@ -1,5 +1,5 @@
 from range import RANGE
-import l
+from .l import *
 from config import *
 
 def _ranges(cols, rowss):

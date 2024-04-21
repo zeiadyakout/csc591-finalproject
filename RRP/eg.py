@@ -1,38 +1,38 @@
-from data import DATA
-from num import NUM
-from sym import SYM
+from .data import DATA
+from .num import NUM
+from .sym import SYM
 import l
 import sys
 import ast
-import misc
+from .misc import *
 import math
 import random
-from config import the
-from rules import RULES
+from .config import the
+from .rules import RULES
 
-def stats():
-    data = DATA("../../data/auto93.csv")
+def stats(src=None):
+    data = DATA(src or "../../data/auto93.csv")
     result = l.sort_string(l.o(data.stats()))
     print(f"\nStats: {result}\n")
     result_bool = result == "{.N: 398, Acc+: 15.57, Lbs-: 2970.42, Mpg+: 23.84}"
     return result_bool
 
-def columns():
-    data = DATA("../../data/auto93.csv")
+def columns(src=None):
+    data = DATA(src or "../../data/auto93.csv")
     expected = 8
     actual = len(data.cols.all)
     print(f"Expected number of columns in file: {expected}\nActual: {actual}\n")
     return expected == actual
 
-def dependent():
-    data = DATA("../../data/auto93.csv")
+def dependent(src=None):
+    data = DATA(src or "../../data/auto93.csv")
     expected = 3
     actual = len(data.cols.y)
     print(f"Expected number of dependent variables in file: {expected}\nActual: {actual}\n")
     return expected == actual
 
-def independent():
-    data = DATA("../../data/auto93.csv")
+def independent(src=None):
+    data = DATA(src or "../../data/auto93.csv")
     expected = 4
     actual = len(data.cols.x)
     print(f"Expected number of independent variables in file: {expected}\nActual: {actual}\n")
@@ -141,9 +141,9 @@ def km():
             DATA("../../data/soybean.csv", lambda data, t: learn(data, t, wme))
             print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))
 
-def sorted():
+def sorted(src=None):
     print("Sorted: ")
-    dataset = DATA("../../data/auto93.csv")
+    dataset = DATA(src or "../../data/auto93.csv")
     firstRow = dataset.rows[0]
     neighbors = firstRow.neighbors(dataset)
 
@@ -151,9 +151,9 @@ def sorted():
         if i % 30 == 0:
             print(f"{(i+1): <8} {row.cells} {firstRow.dist(row, dataset):10.2f}")
     
-def far():
+def far(src=None):
     print("Far: ")
-    dataset = DATA("../../data/auto93.csv")
+    dataset = DATA(src or "../../data/auto93.csv")
 
     a, b, C, evals = dataset.farapart(dataset.rows)
     print("far1: ", a.cells)
@@ -161,32 +161,32 @@ def far():
     print(f"distance = {C:.2f}")
     print("Evaluations: ", evals)
     
-def half():
-    dataset = DATA("../../data/auto93.csv")
+def half(src=None):
+    dataset = DATA(src or "../../data/auto93.csv")
     lefts, rights, left, right, C, cut = dataset.half(dataset.rows)
     o = l.o
     print(o(len(lefts)), o(len(rights)), o(left.cells), o(right.cells), o(C), o(cut))
 
-def tree():
-    t, evals = DATA("../../data/auto93.csv").tree(True)
+def tree(src=None):
+    t, evals = DATA(src or "../../data/auto93.csv").tree(True)
     t.show()
     print(evals)
 
-def branch():
-    dataset = DATA("../../data/auto93.csv")
+def branch(src=None):
+    dataset = DATA(src or "../../data/auto93.csv")
     best, rest, evals = dataset.branch()
     print(l.o(best.mid().cells), l.o(rest.mid().cells))
     print(evals)
 
-def doubletap():
-    dataset = DATA("../../data/auto93.csv")
+def doubletap(src=None):
+    dataset = DATA(src or "../../data/auto93.csv")
     best1, rest, evals1 = dataset.branch(32)
     best2, _, evals2 = best1.branch(4)
     print(l.o(best2.mid().cells), l.o(rest.mid().cells))
     print(evals1+evals2)
 
-def bins():
-    dataset = DATA("../../data/auto93.csv")
+def bins(src=None):
+    dataset = DATA(src or "../../data/auto93.csv")
     best, rest = dataset.branch()#[:2]
     like = best.rows
     hate = l.slice(l.shuffle(rest.rows), 1, 3 * len(like))
@@ -196,7 +196,7 @@ def bins():
     for _, col in enumerate(dataset.cols.x):
         print(col)
         print()
-        for range in misc._ranges1(dataset.cols.all[col], {"LIKE":like, "HATE":hate}):
+        for range in _ranges1(dataset.cols.all[col], {"LIKE":like, "HATE":hate}):
             l.oo(range)
             t.append(range)
     t = sorted(t, key=lambda x: score(x), reverse=True)
@@ -207,8 +207,8 @@ def bins():
             print(l.rnd(score(v)), l.o(v))
     l.oo({"LIKE":len(like), "HATE":len(hate)})
 
-def rules():
-    dataset = DATA("../../data/auto93.csv")
+def rules(src=None):
+    dataset = DATA(src or "../../data/auto93.csv")
 
     tmp = l.shuffle(dataset.rows)
     train = dataset.clone(l.slice(tmp, 1, len(tmp)//2))
@@ -223,7 +223,7 @@ def rules():
 
     print(f'{"Score":^10} {"Mid Selected":^60} {"Rule":^30}')
     print("__________ ____________________________________________________________ ______________________________")
-    for rule in RULES(misc._ranges(dataset.cols.x, rowss), "LIKE", rowss).sorted:
+    for rule in RULES(_ranges(dataset.cols.x, rowss), "LIKE", rowss).sorted:
         result = train.clone(rule.selects(test.rows))
         if len(result.rows) > 0:
             result.rows.sort(key=lambda row: row.d2h(dataset))
@@ -308,8 +308,8 @@ def data():
             print(n)
     return n == 63
 
-def dist():
-    dataset = DATA("../../data/auto93.csv")
+def dist(src=None):
+    dataset = DATA(src or "../../data/auto93.csv")
     r1 = dataset.rows[0]
     rows = r1.neighbors(dataset)
 
@@ -317,8 +317,8 @@ def dist():
         if i % 30 == 0:
             print(l.o(row.cells), l.rnd(row.dist(r1, dataset)))
 
-def far():
-    dataset = DATA("../../data/auto93.csv")
+def far(src=None):
+    dataset = DATA(src or "../../data/auto93.csv")
     a, b, C, evals = dataset.farapart(dataset.rows)
     print(a.cells, b.cells, C)
    

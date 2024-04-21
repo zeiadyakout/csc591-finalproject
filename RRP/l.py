@@ -1,7 +1,7 @@
 import math
 import ast
 import random
-from config import *
+from .config import *
 from itertools import chain, combinations
 
 def keys(t, u=None):
@@ -100,7 +100,7 @@ def many(t, n=None):
         u[i] = any(t)
     return u
 
-def score(t, goal, LIKE, HATE):
+def l_score(t, goal, LIKE, HATE):
     like, hate, tiny = 0, 0, 1E-30
     for klass, n in t.items():
         if klass == goal:

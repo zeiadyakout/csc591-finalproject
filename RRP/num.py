@@ -1,4 +1,4 @@
-from config import the
+from .config import the
 import math
 
 class NUM:

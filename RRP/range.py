@@ -1,4 +1,4 @@
-import l
+from .l import *
 
 class RANGE:
     def __init__(self, at, txt, lo, hi=None):
@@ -23,8 +23,8 @@ class RANGE:
             return f"{s} == {lo}"
         return f"lo <= {s} < {hi}"
     
-    def score(self, goal, LIKE, HATE):
-        return l.score(self.y, goal, LIKE, HATE)
+    def range_score(self, goal, LIKE, HATE):
+        return l_score(self.y, goal, LIKE, HATE)
     
     def merge(self, other):
         both = RANGE(self.at, self.txt, self.x['lo'])
@@ -37,11 +37,11 @@ class RANGE:
 
     def merged(self, other, tooFew):
         both = self.merge(other)
-        e1, n1 = l.entropy(self.y)
-        e2, n2 = l.entropy(other.y)
+        e1, n1 = entropy(self.y)
+        e2, n2 = entropy(other.y)
         if n1 <= tooFew or n2 <= tooFew:
             return both
-        e, _ = l.entropy(both.y)
+        e, _ = entropy(both.y)
         if e <= (n1 * e1 + n2 * e2) / (n1 + n2):
             return both
     
