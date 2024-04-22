@@ -10,6 +10,13 @@ data, x, y = proc.processWine()
 gmm = GaussianMixture(n_components=3)
 clusters = gmm.fit_predict(x)
 
+data['Clusters'] = clusters
+
+for i in range(3):
+    clustered_data = data[data['Clusters'] == i]
+    clustered_data = clustered_data.drop(columns=['Clusters'])
+    clustered_data.to_csv("clusteredData/gaussmix_wine" + str(i) + ".csv ")
+
 # pca setup 
 pca = PCA(n_components=2)
 pcs = pca.fit_transform(x)
