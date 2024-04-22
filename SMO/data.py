@@ -1,14 +1,16 @@
-from row import ROW
-from cols import COLS
+from .row import ROW
+from .cols import COLS
 import csv
-import l
+from .l import *
 import random
+import os
 
 
 class DATA:
     def __init__(self, src, fun=None):
         self.rows = []
         self.cols = None
+        self.src = src
 
         if isinstance(src, str):
             with open(src, "r") as input_data:
@@ -62,7 +64,7 @@ class DATA:
         for _, col in self.cols.all.items():
             if cols == 'y' or (cols and col.txt == cols):
                 value = getattr(col, fun or "mid", lambda x: x.mid)()
-                u[col.txt] = l.rnd(value, ndivs)
+                u[col.txt] = rnd(value, ndivs)
         filtered_cols = {key: value for key, value in u.items() if key.endswith(
             '!') or key.endswith('+') or key.endswith('-') or key == ".N"}
         return filtered_cols
@@ -70,7 +72,7 @@ class DATA:
     def gate(self, budget0, budget, some):
         stats, bests = [], []
 
-        self.rows = l.shuffle(self.rows)
+        self.rows = shuffle(self.rows)
         
         top6 = self.rows[:6]
         # print("1. top6")
@@ -87,11 +89,11 @@ class DATA:
 
         rows_d2h = []
         for row in self.rows:
-            rows_d2h.append((row.d2h(data=DATA("../../data/auto93.csv")), row))
+            rows_d2h.append((row.d2h(data=DATA(self.src)), row))
         rows_d2h = sorted(rows_d2h, key = lambda x: x[0])
         # print("3. most", rows_d2h[0][1].cells, "\n")
 
-        rows = l.shuffle(self.rows)
+        rows = shuffle(self.rows)
         lite = rows[:budget0+1] #l.slice(rows, 1, budget0)
 
         dark = rows[budget0+1:] #l.slice(rows, budget0+1) # We'll need to adjust the parameter in the function definition of slice()
@@ -103,7 +105,7 @@ class DATA:
         for i in range(budget): #Using +1 to include all values in budget
             lite_d2h = []
             for row in lite:
-                lite_d2h.append((row.d2h(data=DATA("../../data/auto93.csv")), row))
+                lite_d2h.append((row.d2h(data=DATA(self.src)), row))
             lite_d2h = sorted(lite_d2h, key = lambda x: x[0])
             best, rest = self.bestRest(lite, len(lite) ** some)
             todo, selected = self.split(best, rest, lite, dark)

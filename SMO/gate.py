@@ -1,5 +1,5 @@
-from config import parse_args, the
-from data import DATA
+from .config import parse_args, the
+from .data import DATA
 import eg
 import os
 import shutil

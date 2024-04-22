@@ -1,8 +1,8 @@
-from config import the
+from .config import the
 import math
-import cols
+from .cols import *
 import sys
-import l
+from .l import *
 
 class ROW:
     def __init__(self, t):
@@ -27,5 +27,5 @@ class ROW:
     def neighbors(self, data, rows=None):
         if rows is None:
             rows = data.rows
-        return l.keysort(rows, lambda row: self.dist(row, data))
+        return keysort(rows, lambda row: self.dist(row, data))
     

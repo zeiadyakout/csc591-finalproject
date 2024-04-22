@@ -1,10 +1,10 @@
-from row import ROW
-from cols import COLS
+from .row import ROW
+from .cols import COLS
 import csv
-import l as lib
+from .l import *
 import random
-from config import *
-from node import NODE
+from .config import *
+from .node import NODE
 
 
 class DATA:
@@ -64,7 +64,7 @@ class DATA:
         for col in self.cols.all:
             if cols == 'y' or (cols and col.txt == cols):
                 value = getattr(col, fun or "mid", lambda x: x.mid)()
-                u[col.txt] = lib.rnd(value, ndivs)
+                u[col.txt] = rnd(value, ndivs)
         filtered_cols = {key: value for key, value in u.items() if key.endswith(
             '!') or key.endswith('+') or key.endswith('-') or key == ".N"}
         return filtered_cols
@@ -78,7 +78,7 @@ class DATA:
     def farapart(self, rows, sortp=None, a=None, b=None, far=None, evals=None):
         far = int(len(rows) * the.Far)
         evals = 1 if a else 2
-        a = lib.any(rows).neighbors(self, rows)[far]
+        a = any(rows).neighbors(self, rows)[far]
         b = a.neighbors(self, rows)[far]
         if sortp and b.d2h(self) < a.d2h(self):
             a, b = b, a
@@ -86,14 +86,14 @@ class DATA:
         return a, b, a.dist(b, self), evals
     
     def half(self, rows, sortp=None, before=None, evals=None):
-        some = lib.many(rows, min(the.Half, len(rows)))
+        some = many(rows, min(the.Half, len(rows)))
         a, b, C, evals = self.farapart(some, sortp, before)
         def d(row1, row2):
             return row1.dist(row2, self)
         def project(r):
             return (d(r, a) ** 2 + C ** 2 - d(r, b) ** 2) / (2 * C)
         as_, bs = [], []
-        for n, row in enumerate(lib.keysort(rows, project)):
+        for n, row in enumerate(keysort(rows, project)):
             if n < (len(rows) // 2 - 1):
                 as_.append(row)
             else:

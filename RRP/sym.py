@@ -1,6 +1,6 @@
 import math
-from config import the
-import l
+from .config import the
+from .l import *
 
 class SYM:
     def __init__(self, s=" ", n=0):

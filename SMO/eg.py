@@ -1,34 +1,34 @@
-from data import DATA
-from num import NUM
-from sym import SYM
-import l
+from .data import DATA
+from .num import NUM
+from .sym import SYM
+from .l import *
 import sys
 import ast
-from config import the
+from .config import the
 
-def stats():
-    data = DATA("../data/auto93.csv")
-    result = l.sort_string(l.o(data.stats()))
+def stats(src=None):
+    data = DATA(src or "../../data/auto93.csv")
+    result = sort_string(o(data.stats()))
     print(f"\nStats: {result}\n")
     result_bool = result == "{.N: 398, Acc+: 15.57, Lbs-: 2970.42, Mpg+: 23.84}"
     return result_bool
 
-def columns():
-    data = DATA("../data/auto93.csv")
+def columns(src=None):
+    data = DATA(src or "../../data/auto93.csv")
     expected = 8
     actual = len(data.cols.all)
     print(f"Expected number of columns in file: {expected}\nActual: {actual}\n")
     return expected == actual
 
-def dependent():
-    data = DATA("../data/auto93.csv")
+def dependent(src=None):
+    data = DATA(src or "../../data/auto93.csv")
     expected = 3
     actual = len(data.cols.y)
     print(f"Expected number of dependent variables in file: {expected}\nActual: {actual}\n")
     return expected == actual
 
-def independent():
-    data = DATA("../data/auto93.csv")
+def independent(src=None):
+    data = DATA(src or "../../data/auto93.csv")
     expected = 4
     actual = len(data.cols.x)
     print(f"Expected number of independent variables in file: {expected}\nActual: {actual}\n")
@@ -144,7 +144,7 @@ def run_test(test_name):
 
 def all(bad=0):
     bad = 0
-    for k in l.keys(globals()):
+    for k in keys(globals()):
         if k != "all":
             if run_test(k) == False:
                 bad += 1

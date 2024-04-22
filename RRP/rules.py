@@ -1,6 +1,6 @@
-import l as lib
-from rule import RULE
-from config import *
+from .l import *
+from .rule import RULE
+from .config import *
 
 class RULES:
     def __init__(self, ranges, goal, rowss):
@@ -25,12 +25,12 @@ class RULES:
                 self.HATE += len(rows)
 
     def score(self, t):
-        return lib.score(t, self.goal, self.LIKE, self.HATE)
+        return l_score(t, self.goal, self.LIKE, self.HATE)
     
     def _try(self, ranges):
         u = []
         
-        for subset in lib.powerset(ranges):
+        for subset in powerset(ranges):
             if len(subset) > 0:
                 rule = RULE(subset)
                 rule.scored = self.score(rule.selectss(self.rowss))
