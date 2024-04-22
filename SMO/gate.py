@@ -1,9 +1,6 @@
-from .config import parse_args, the
-from .data import DATA
+from SMO.config import parse_args, the
+from SMO.data import DATA
 import eg
-import os
-import shutil
-import sys
 
 if __name__ == "__main__":
     args = parse_args()

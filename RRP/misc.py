@@ -1,6 +1,6 @@
-from .range import RANGE
-from .l import *
-from .config import *
+from RRP.range import RANGE
+from RRP.l import *
+from RRP.config import *
 
 def _ranges(cols, rowss):
     t = []

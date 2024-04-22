@@ -1,4 +1,4 @@
-from .l import *
+from RRP.l import *
 
 class RANGE:
     def __init__(self, at, txt, lo, hi=None):

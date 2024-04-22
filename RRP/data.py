@@ -1,10 +1,10 @@
-from .row import ROW
-from .cols import COLS
+from RRP.row import ROW
+from RRP.cols import COLS
 import csv
-from .l import *
+from RRP.l import *
 import random
-from .config import *
-from .node import NODE
+from RRP.config import *
+from RRP.node import NODE
 
 
 class DATA:

@@ -1,5 +1,5 @@
 import math
-from .config import the
+from SMO.config import the
 
 class SYM:
     def __init__(self, s="", n=0):

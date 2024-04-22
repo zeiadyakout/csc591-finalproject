@@ -1,10 +1,10 @@
-from .data import DATA
-from .num import NUM
-from .sym import SYM
-from .l import *
+from SMO.data import DATA
+from SMO.num import NUM
+from SMO.sym import SYM
+from SMO.l import *
 import sys
 import ast
-from .config import the
+from SMO.config import the
 
 def stats(src=None):
     data = DATA(src or "../../data/auto93.csv")

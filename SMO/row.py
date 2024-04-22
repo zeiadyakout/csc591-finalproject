@@ -1,6 +1,6 @@
-from .config import the
+from SMO.config import the
 import math
-from .cols import *
+from SMO.cols import *
 
 class ROW:
     def __init__(self, t):

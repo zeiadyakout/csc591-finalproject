@@ -1,7 +1,7 @@
-from .row import ROW
-from .cols import COLS
+from SMO.row import ROW
+from SMO.cols import COLS
 import csv
-from .l import *
+from SMO.l import *
 import random
 import os
 

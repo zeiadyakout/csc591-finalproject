@@ -1,8 +1,8 @@
-from .config import the
+from RRP.config import the
 import math
-from .cols import *
+from RRP.cols import *
 import sys
-from .l import *
+from RRP.l import *
 
 class ROW:
     def __init__(self, t):

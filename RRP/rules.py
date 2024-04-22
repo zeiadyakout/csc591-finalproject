@@ -1,6 +1,6 @@
-from .l import *
-from .rule import RULE
-from .config import *
+from RRP.l import *
+from RRP.rule import RULE
+from RRP.config import *
 
 class RULES:
     def __init__(self, ranges, goal, rowss):

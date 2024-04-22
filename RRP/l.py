@@ -1,7 +1,7 @@
 import math
 import ast
 import random
-from .config import *
+from RRP.config import *
 from itertools import chain, combinations
 
 def keys(t, u=None):

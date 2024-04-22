@@ -1,4 +1,4 @@
-from .l import *
+from RRP.l import *
 
 class NODE:
     def __init__(self, data):

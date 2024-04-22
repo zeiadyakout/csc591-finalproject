@@ -1,4 +1,4 @@
-from .config import the
+from SMO.config import the
 
 
 class NUM:

@@ -1,6 +1,6 @@
 import math
-from .config import the
-from .l import *
+from RRP.config import the
+from RRP.l import *
 
 class SYM:
     def __init__(self, s=" ", n=0):

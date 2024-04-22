@@ -1,4 +1,4 @@
-from .config import the
+from RRP.config import the
 import math
 
 class NUM:

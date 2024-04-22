@@ -1,14 +1,14 @@
-from .data import DATA
-from .num import NUM
-from .sym import SYM
-from .l import *
+from RRP.data import DATA
+from RRP.num import NUM
+from RRP.sym import SYM
+import RRP.l as lib
 import sys
 import ast
-from .misc import *
+from RRP.misc import *
 import math
 import random
-from .config import the
-from .rules import RULES
+from RRP.config import the
+from RRP.rules import RULES
 
 def stats(src=None):
     data = DATA(src or "../../data/auto93.csv")
@@ -182,7 +182,7 @@ def doubletap(src=None):
     dataset = DATA(src or "../../data/auto93.csv")
     best1, rest, evals1 = dataset.branch(32)
     best2, _, evals2 = best1.branch(4)
-    print(o(best2.mid().cells), o(rest.mid().cells))
+    print(lib.o(best2.mid().cells), lib.o(rest.mid().cells))
     print(evals1+evals2)
 
 def bins(src=None):
