@@ -15,7 +15,7 @@ data['Clusters'] = clusters
 for i in range(3):
     clustered_data = data[data['Clusters'] == i]
     clustered_data = clustered_data.drop(columns=['Clusters'])
-    clustered_data.to_csv("clusteredData/kmeans_wine" + str(i) + ".csv ")
+    clustered_data.to_csv("clusteredData/kmeans_wine" + str(i) + ".csv ", index=False)
 
 # pca setup 
 pca = PCA(n_components=2)

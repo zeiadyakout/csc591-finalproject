@@ -142,9 +142,20 @@ def part2(filename, seed, repeats):
     # output stuff
     print("#report8")
     stats.eg0(samples)
+# kmeans
+#paths = ["clusteredData/kmeans_wine0.csv", "clusteredData/kmeans_wine1.csv", "clusteredData/kmeans_wine2.csv"]
+# gaussmix
+#paths = ["clusteredData/gaussmix_wine0.csv", "clusteredData/gaussmix_wine1.csv", "clusteredData/gaussmix_wine2.csv"]
+# kmedoids
+paths = ["clusteredData/kmedoids_wine0.csv", "clusteredData/kmedoids_wine1.csv", "clusteredData/kmedoids_wine2.csv"]
+for idx, path in enumerate(paths):
+    print("Part", idx + 1)
+    part1(path, 31210, 20)
+    part2(path, 31210, 20)
+    print()
 
-filename = "data/wineQuality/wineQuality.csv"
-repeats = 20
-seed = 31210
-part1(filename, seed, repeats)
-part2(filename, seed, repeats)
+# filename = "data/wineQuality/wineQuality.csv"
+# repeats = 20
+# seed = 31210
+# part1(filename, seed, repeats)
+# part2(filename, seed, repeats)
